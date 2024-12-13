@@ -2,28 +2,63 @@ import React, { useState } from "react";
 
 function MyComponent() {
   const [name, setName] = useState("Guest");
-  const [age, setAge] = useState(0);
-  const [isEmployed, setIsEmployed] = useState(false)
+  const [quantity, setQuantity] = useState(1);
+  const [comment, setComment] = useState("");
+  const [payment, setPayment] = useState("");
+  const [shipping, setShipping] = useState("Delivery");
 
-  const updateName = () => {
-    setName("Abdellah");
-  };
-
-  const incrementAge = ()=>{
-    setAge(age +2)
+  function handleNameChnage(event) {
+    setName(event.target.value);
   }
-
-  const toggleEmpoyedStatus = ()=>{
-    setIsEmployed(!isEmployed)
+  function handleQuantityChante(event) {
+    setQuantity(event.target.value);
+  }
+  function handleCommentChange(event) {
+    setComment(event.target.value);
+  }
+  function handlePayment(event) {
+    setPayment(event.target.value);
+  }
+  function handleShipping(event) {
+    setShipping(event.target.value);
   }
   return (
     <div>
+      <input type="text" value={name} onChange={handleNameChnage} />
       <p>Name : {name}</p>
-      <button onClick={updateName}>Set Name</button>
-      <p>Age : {age}</p>
-      <button onClick={incrementAge}>Increment Age</button>
-      <p>is Employed : {isEmployed ? "Yes": "No"}</p>
-      <button onClick={toggleEmpoyedStatus}>change status</button>
+      <input value={quantity} onChange={handleQuantityChante} type="number" />
+      <p>Quantity : {quantity}</p>
+      <textarea
+        value={comment}
+        onChange={handleCommentChange}
+        placeholder="Enter delivery instructions"
+      ></textarea>
+      <p>Comment : {comment}</p>
+      <select value={payment} onChange={handlePayment}>
+        <option value="">Select an option</option>
+        <option value="Visa">Visa</option>
+        <option value="MasterCard">MasterCard</option>
+      </select>
+      <p>Payment : {payment}</p>
+      <label>
+        <input
+          type="radio"
+          value="Pick Up"
+          checked={shipping === "Pick Up"}
+          onChange={handleShipping}
+        />
+        Pick Up
+      </label>
+      <label>
+        <input
+          type="radio"
+          value="Delivery"
+          checked={shipping === "Delivery"}
+          onChange={handleShipping}
+        />
+        Delivery
+      </label>
+      <p>Shipping : {shipping}</p>
     </div>
   );
 }
